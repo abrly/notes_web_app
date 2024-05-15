@@ -1,0 +1,17 @@
+version : 02
+
+phases: 
+  pre-build:  
+    commands: 
+      - echo deployment started on `date`
+      - echo syncing s3 conent
+      - aws s3 sync ./www/ s3://notesapp.xyz
+  build:
+    commands:
+      - invalidating cloudfront cache
+      # aws cloudfront create-invalidation --distribution-id XXXXX --paths "/*"
+  post-build:
+    commands:
+      - echo deployment completed on `date`
+
+
