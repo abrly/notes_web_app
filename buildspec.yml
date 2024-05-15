@@ -1,17 +1,16 @@
-version : 02
-
-phases: 
-  pre-build:  
-    commands: 
+# AWS CodeBuild pipeline
+version: 0.2
+phases:  
+  pre_build:
+    commands:
       - echo deployment started on `date`
-      - echo syncing s3 conent
-      - aws s3 sync ./www/ s3://notesapp.xyz
+      - echo syncing content 
+      - aws s3 sync ./www/ s3://studionotesapp.xyz
   build:
     commands:
-      - invalidating cloudfront cache
-      # aws cloudfront create-invalidation --distribution-id XXXXX --paths "/*"
-  post-build:
-    commands:
-      - echo deployment completed on `date`
-
+      - echo invalidating cloudfront cache
+      # aws cloudfront create-invalidation --distribution-id ##### --paths "/*"
+  post_build:
+     commands:
+      - echo Build completed on `date`
 
